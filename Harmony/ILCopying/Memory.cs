@@ -29,10 +29,6 @@ namespace Harmony.ILCopying
 		{
 			PlatformID.Win32NT, PlatformID.Win32S, PlatformID.Win32Windows, PlatformID.WinCE
 		};
-		// private static readonly HashSet<PlatformID> WindowsPlatformIDSet = new HashSet<PlatformID>
-		// {
-		// 	PlatformID.Win32NT, PlatformID.Win32S, PlatformID.Win32Windows, PlatformID.WinCE
-		// };
 
 		public static bool IsWindows
 		{

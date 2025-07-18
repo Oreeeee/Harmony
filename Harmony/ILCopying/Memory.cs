@@ -25,12 +25,25 @@ namespace Harmony.ILCopying
 
 	public static class Memory
 	{
-		private static readonly HashSet<PlatformID> WindowsPlatformIDSet = new HashSet<PlatformID>
+		private static readonly PlatformID[] WindowsPlatformIDSet =
 		{
 			PlatformID.Win32NT, PlatformID.Win32S, PlatformID.Win32Windows, PlatformID.WinCE
 		};
+		// private static readonly HashSet<PlatformID> WindowsPlatformIDSet = new HashSet<PlatformID>
+		// {
+		// 	PlatformID.Win32NT, PlatformID.Win32S, PlatformID.Win32Windows, PlatformID.WinCE
+		// };
 
-		public static bool IsWindows => WindowsPlatformIDSet.Contains(Environment.OSVersion.Platform);
+		public static bool IsWindows
+		{
+			get
+			{
+				foreach (PlatformID platformID in WindowsPlatformIDSet)
+					if (platformID == Environment.OSVersion.Platform) return true;
+
+				return false;
+			}
+		}
 
 		// Safe to use windows reference since this will only ever be called on windows
 		//
@@ -63,7 +76,7 @@ namespace Harmony.ILCopying
 		 * This is still a rough part in Harmony. So much information and no easy way
 		 * to determine when and what is valid. Especially with different environments
 		 * and .NET versions. More information might be found here:
-		 * 
+		 *
 		 * https://stackoverflow.com/questions/38782934/how-to-replace-the-pointer-to-the-overridden-virtual-method-in-the-pointer-of/
 		 * https://stackoverflow.com/questions/39034018/how-to-replace-a-pointer-to-a-pointer-to-a-method-in-a-class-of-my-method-inheri
 		 *

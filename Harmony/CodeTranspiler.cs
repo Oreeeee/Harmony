@@ -157,10 +157,8 @@ namespace Harmony
 
 		public static IEnumerable ConvertInstructionsAndUnassignedValues(Type type, IEnumerable enumerable, out Dictionary<object, Dictionary<string, object>> unassignedValues)
 		{
-			var enumerableAssembly = type.GetGenericTypeDefinition().Assembly;
-			var genericListType = enumerableAssembly.GetType(typeof(List<>).FullName);
 			var elementType = type.GetGenericArguments()[0];
-			var listType = enumerableAssembly.GetType(genericListType.MakeGenericType(new Type[] { elementType }).FullName);
+			var listType = typeof(List<>).MakeGenericType(elementType);
 			var list = Activator.CreateInstance(listType);
 			var listAdd = list.GetType().GetMethod("Add");
 			unassignedValues = new Dictionary<object, Dictionary<string, object>>();
